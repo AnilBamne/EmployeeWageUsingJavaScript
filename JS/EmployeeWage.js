@@ -30,7 +30,7 @@ function GetEmpHours(empInput)
             return empHrs=0;
     }
 }
-
+///uc5 calculate wagw till max working days or hrs reached
 while(day<=MAX_WORKING_DAYS && totalEmpHrs<=MAX_WORKING_HRS)
 {
     let empInput=Math.floor((Math.random()*10)%3);
