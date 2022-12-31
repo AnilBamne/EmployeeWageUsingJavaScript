@@ -10,6 +10,8 @@ const MAX_WORKING_HRS=160;
 let empHrs=0;
 let totalEmpHrs=0,day=0;
 let empWage=0,totalEmpWage=0;
+//uc6 store daily wage in array
+let empDailyWageArray=new Array();
 
 /// Calculate daily eage using Function
 function GetEmpHours(empInput)
@@ -37,7 +39,17 @@ while(day<=MAX_WORKING_DAYS && totalEmpHrs<=MAX_WORKING_HRS)
     empWage=EMP_RATE_PER_HR*GetEmpHours(empInput);
     //console.log("day "+day+" wage is "+(empHrs*EMP_RATE_PER_HR))
     totalEmpHrs+=empHrs;
+    //adding daily wage to array
+    empDailyWageArray.push(computeEmpDailyWage(empHrs));
     day++;
 }
+function computeEmpDailyWage(empHrs)
+{
+    return empHrs*EMP_RATE_PER_HR;
+}
+// printing daily wage array
+console.log("employee daily wage is :\n"+empDailyWageArray);
+
 totalEmpWage=totalEmpHrs*EMP_RATE_PER_HR;
 console.log("Total Employee wage for "+(day-1)+" days or "+(totalEmpHrs)+" working Hrs is:"+totalEmpWage);
+
