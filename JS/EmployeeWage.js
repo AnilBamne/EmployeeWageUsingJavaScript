@@ -12,6 +12,8 @@ let totalEmpHrs=0,day=0;
 let empWage=0,totalEmpWage=0;
 //uc6 store daily wage in array
 let empDailyWageArray=new Array();
+//uc8 emp wage using map
+let empWageUsingMap=new Map();
 
 /// Calculate daily eage using Function
 function GetEmpHours(empInput)
@@ -39,6 +41,9 @@ while(day<=MAX_WORKING_DAYS && totalEmpHrs<=MAX_WORKING_HRS)
     empWage=EMP_RATE_PER_HR*GetEmpHours(empInput);
     //console.log("day "+day+" wage is "+(empHrs*EMP_RATE_PER_HR))
     totalEmpHrs+=empHrs;
+    //adding empWage and day to map
+    empWageUsingMap.set(day,empWage);
+
     //adding daily wage to array
     empDailyWageArray.push(empWage);
     day++;
@@ -114,3 +119,12 @@ function howManyDaysWorked(days,dailyWage)
 }
 console.log("uc 7g - How many days employee worked");
 console.log(empDailyWageArray.reduce(howManyDaysWorked,0));
+
+//uc8 calculating empWage using map
+console.log("Daily wage in Map object : ");
+console.log(empWageUsingMap);
+
+//UC8 fetching only values and storing into array => then using reduce function calculating total wage
+console.log("total wage using Map boject :");
+let totalWagebuMap=Array.from(empWageUsingMap.values());
+console.log(totalWagebuMap.reduce(getTotalWageUsingReduce,0));
