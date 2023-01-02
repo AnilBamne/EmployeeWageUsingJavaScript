@@ -12,8 +12,10 @@ let totalEmpHrs=0,day=0;
 let empWage=0,totalEmpWage=0;
 //uc6 store daily wage in array
 let empDailyWageArray=new Array();
+//uc 10 - array for storing objects
+let dayWithWageAndHrsArray=new Array();
 //uc8 emp wage using map
-let empWageUsingMap=new Map();
+let empdaywithWageMap=new Map();
 let empDayWithHrsMap=new Map();
 
 /// Calculate daily eage using Function
@@ -43,12 +45,24 @@ while(day<=MAX_WORKING_DAYS && totalEmpHrs<=MAX_WORKING_HRS)
     //console.log("day "+day+" wage is "+(empHrs*EMP_RATE_PER_HR))
     totalEmpHrs+=empHrs;
     //adding empWage and day to map
-    empWageUsingMap.set(day,empWage);
+    empdaywithWageMap.set(day,empWage);
 
     //adding day and empHrs to map
     empDayWithHrsMap.set(day,empHrs);
     //adding daily wage to array
     empDailyWageArray.push(empWage);
+
+    dayWithWageAndHrsArray.push (
+        {
+            DayNum:day,
+            Wage:empWage,
+            Hours:empHrs,
+            toString()
+            {
+                return "\nFor day : "+this.DayNum+" => Wage is:"+this.Wage+" Hours is:"+this.Hours;
+            }
+        }
+    );
     day++;
 }
 
@@ -125,11 +139,11 @@ console.log(empDailyWageArray.reduce(howManyDaysWorked,0));
 
 //uc8 calculating empWage using map
 console.log("Daily wage in Map object : ");
-console.log(empWageUsingMap);
+console.log(empdaywithWageMap);
 
 //UC8 fetching only values and storing into array => then using reduce function calculating total wage
 console.log("total wage using Map boject :");
-let totalWageByMap=Array.from(empWageUsingMap.values());
+let totalWageByMap=Array.from(empdaywithWageMap.values());
 console.log(totalWageByMap.reduce(getTotalWageUsingReduce,0));
 
 //UC9 a.Calc total Wage and total hours worked using 'Arrow' function(Lambda function).
@@ -156,3 +170,6 @@ console.log("UC9 b. Showing the full workings days, part working days and no wor
 console.log("Full working days = "+fullWorkingDays);
 console.log("Part working days = "+partWorkingDays);
 console.log("Non working days ="+nonWorkingDays);
+
+/* Ability to store the Day, Hours Worked and Wage Earned in a single object.*/
+console.log("uc 10 - storing the Day, Hours Worked and Wage Earned in a single object."+dayWithWageAndHrsArray);
