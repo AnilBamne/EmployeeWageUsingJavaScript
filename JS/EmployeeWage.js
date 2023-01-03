@@ -54,12 +54,12 @@ while(day<=MAX_WORKING_DAYS && totalEmpHrs<=MAX_WORKING_HRS)
 
     dayWithWageAndHrsArray.push (
         {
-            DayNum:day,
-            Wage:empWage,
-            Hours:empHrs,
+            dayNum:day,
+            dailyWage:empWage,
+            dailyHours:empHrs,
             toString()
             {
-                return "\nFor day : "+this.DayNum+" => Wage is:"+this.Wage+" Hours is:"+this.Hours;
+                return "\nFor day : "+this.dayNum+" => Wage is:"+this.dailyWage+" Hours is:"+this.dailyHours;
             }
         }
     );
@@ -171,5 +171,24 @@ console.log("Full working days = "+fullWorkingDays);
 console.log("Part working days = "+partWorkingDays);
 console.log("Non working days ="+nonWorkingDays);
 
-/* Ability to store the Day, Hours Worked and Wage Earned in a single object.*/
+/*UC10 -> Ability to store the Day, Hours Worked and Wage Earned in a single object.*/
 console.log("uc 10 - storing the Day, Hours Worked and Wage Earned in a single object."+dayWithWageAndHrsArray);
+
+/*UC11 -> Perform following Object operations using Arrow Functions
+a. Calc total Wage and total hours worked
+b. Show the full workings days using foreach
+c. Show Part working days using Map by reducing to
+String Array
+d. No working days only using Map function   */
+let totalWages=dayWithWageAndHrsArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0).reduce((totalwage,dailyHrsAndWage) => totalwage+=dailyHrsAndWage.dailyWage,0);
+let totalHoursworked=dayWithWageAndHrsArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage >0).reduce((totalhrs,dailyHrsAndWage) => totalhrs+=dailyHrsAndWage.dailyHours,0);
+
+console.log("UC 11A - total wage  : "+totalWages+" total hrs worked :"+totalHoursworked)
+
+let fulldays=dayWithWageAndHrsArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours==8).map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+let partdays=dayWithWageAndHrsArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours==4).map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+let nonWorkDays=dayWithWageAndHrsArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours==0).map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+
+console.log("UC 11B - full working days are: "+fulldays);
+console.log("UC 11C - part working days are: "+partdays);
+console.log("UC 11D - Non working days are :"+nonWorkDays)
